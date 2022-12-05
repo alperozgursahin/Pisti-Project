@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class test2 {
+public class PistiProject {
 
 	public static int counter = 0;
 	public static String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
