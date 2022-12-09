@@ -44,7 +44,7 @@ public class PistiProject {
 		System.out.println("Round "+round);
 		
 		boolean	computerTurn = false;
-		deliveryCard2(deck, round);
+		dealCards(deck, round);
 		int lastIndex = 3;
 		insideCounter = 0;
 		insideCounter3 = 0;
@@ -355,24 +355,9 @@ public class PistiProject {
 	}
 	
 	
-	public static void deliveryCard(String[] deck, int round) {		//Delivery Cards
-		int count = 2;
-		for (int i = 1*round ; i<8+round ;i++) {
-			if (count %2 == 0 ) {
-				userCards[(i-1)/2] = deck[deck.length-(i*round)-4];
-				count++;
-				
-			}
-			else {
-				computerCards[(i-1)/2] = deck[deck.length-(i*round)-4];
-				count++;
-			}	
-			
-		}
-		
-	}
 	
-	public static void deliveryCard2(String[] deck, int round) {
+	
+	public static void dealCards(String[] deck, int round) {		//DealCards
 		int k = 4*(round-1);
 		for (int i = 4*round; i<(8*round)-k; i++)  {
 			userCards[i-4*round] = deck[deck.length-1-i];
