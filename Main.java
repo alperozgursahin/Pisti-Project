@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Scanner;
+
 public class Main {
 	
 	public static int round = 1;
@@ -11,10 +13,15 @@ public class Main {
 	public static int insideCounter3;
 	
 	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("What is your name?: ");
+		String username = scanner.next();
+		
 		Deck deck = new Deck();
 		Calculator calculator = new Calculator(deck.getCollectedUserCards(), deck.getCollectedComputerCards());
 		String[] deck1 = deck.DeckOfCard();
-		GameEnd gameEnd = new GameEnd(calculator.getUserScore(),calculator.getComputerScore());
+		GameEnd gameEnd = new GameEnd();
+		ScoreBoard scoreBoard = new ScoreBoard();
 		//GameProgress gameProgress = new GameProgress();
 		//GameBegin gameBegin = new GameBegin(round);
 		
@@ -47,6 +54,9 @@ public class Main {
 		}
 		calculator.calculator(deck.getCollectedUserCards(), deck.getCollectedComputerCards());
 		gameEnd.scoreBoard(calculator.getUserScore(),calculator.getComputerScore());
+		if (calculator.getUserScore() > calculator.getComputerScore()) {
+			scoreBoard.scoreWriter(calculator.winnerScore(), username);
+		}
 		
 		
 		

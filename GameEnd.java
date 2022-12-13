@@ -4,11 +4,6 @@ public class GameEnd {
 	private int userScore;
 	private int computerScore;
 	
-	public GameEnd(int userScore, int computerScore) {
-		this.setUserScore(userScore);
-		this.setComputerScore(computerScore);
-		
-	}
 	
 	
 	

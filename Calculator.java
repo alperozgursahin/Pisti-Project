@@ -5,11 +5,12 @@ public class Calculator {
 	private static int computerScore;
 	private static int userPisti;
 	private static int computerPisti;
-	private  String[] collectedUserCards;
+	private String[] collectedUserCards;
 	private String[] collectedComputerCards;
+	
 	public Calculator(String[] collectedUserCards, String[] collectedComputerCards) {
-		this.collectedUserCards = collectedUserCards;
-		this.collectedComputerCards = collectedComputerCards;
+		this.setCollectedUserCards(collectedUserCards);
+		this.setCollectedComputerCards(collectedComputerCards);
 	}
 	public int getUserScore() {
 		return userScore;
@@ -17,9 +18,16 @@ public class Calculator {
 	public int getComputerScore() {
 		return computerScore;
 	}
-
+	
+	
+	
 	public void calculator(String[] collectedUserCards, String[] collectedComputerCards) {
-
+		
+		Deck deck = new Deck();
+		userPisti = deck.getUserPisti();
+		computerPisti = deck.getComputerPisti();
+				
+		
 		int userDiamonds10 = 0;
 		int computerDiamonds10 = 0;
 		int userClubs2 = 0;
@@ -29,36 +37,22 @@ public class Calculator {
 		int userJack = 0;
 		int computerJack = 0;
 		
-		for (int i = 0; i < collectedUserCards.length; i++) {
+		for (int i = 0; i < collectedUserCards.length; i++) {			//Null to empty String.
 			if (collectedUserCards[i] == (null)) {
 				collectedUserCards[i] = "  ";
 			}
 			
 		}
 		
-		for (int i = 0; i < collectedComputerCards.length; i++) {
+		for (int i = 0; i < collectedComputerCards.length; i++) {		//Null to empty String.
 			if (collectedComputerCards[i]== null) {
 				collectedComputerCards[i] = "  ";
 			}
 			
 		}
 		
-		if (collectedUserCards.length > collectedComputerCards.length) {
-			userScore +=3;
-		}
-		else if (collectedComputerCards.length > collectedUserCards.length) {
-			computerScore +=3;
-		}
-		else {
-			computerScore += 3;
-		}
-		if (userPisti>0) {
-			userScore += userPisti*3;
-		}
-		if (computerPisti>0) {
-			computerScore += computerPisti*3;
-		}
-		for (int i = 0; i<collectedUserCards.length; i++ ) {
+		
+		for (int i = 0; i<collectedUserCards.length; i++ ) {			
 			if (collectedUserCards[i].equals("Diamonds 10")) {
 				userDiamonds10 ++;
 			}
@@ -88,6 +82,24 @@ public class Calculator {
 			}
 			
 		}
+		
+		//SCORING
+		
+		if (collectedUserCards.length > collectedComputerCards.length) {
+			userScore +=3;
+		}
+		if (collectedComputerCards.length > collectedUserCards.length) {
+			computerScore +=3;
+		}
+		
+		if (userPisti>0) {					//Checks User's Pisti Score
+			userScore += userPisti*10;
+		}
+		if (computerPisti>0) {				//Checks Computer's Pisti Score
+			computerScore += computerPisti*10;
+		}
+		
+		
 		if (userDiamonds10 > 0 ) {
 			userScore += 10;
 		}
@@ -121,8 +133,55 @@ public class Calculator {
 		}
 		else {
 			System.out.println("Computer win!");
+			
 		}
+		
+		
+		System.out.println("User Cards: ");
+		for (int i = 0; i<collectedUserCards.length; i++) {
+			if (collectedUserCards[i].equals("  ")) {
+				continue;
+			}
+			System.out.println(collectedUserCards[i]);
+		}
+		System.out.println("User's Pisti: "+userPisti);
+		
+		System.out.println("Computer Cards:");
+		for (int i = 0; i<collectedComputerCards.length; i++) {
+			if (collectedComputerCards[i].equals("  ")) {
+				continue;
+			}
+			System.out.println(collectedComputerCards[i]);
+		}
+		System.out.println("Computer's Pisti: "+computerPisti);
 	}
+	public String[] getCollectedUserCards() {
+		return collectedUserCards;
+	}
+	public void setCollectedUserCards(String[] collectedUserCards) {
+		this.collectedUserCards = collectedUserCards;
+	}
+	public String[] getCollectedComputerCards() {
+		return collectedComputerCards;
+	}
+	public void setCollectedComputerCards(String[] collectedComputerCards) {
+		this.collectedComputerCards = collectedComputerCards;
+	}
+	public int winnerScore() {
+		int score = 0;
+		if (userScore > computerScore) {
+			score = userScore;
+		}
+		if (computerScore > userScore ) {
+			score = computerScore;
+		}
+		if (userScore == computerScore) {
+			score = userScore;
+		}
+		return score;
+		
+	}
+	
 }
 
 

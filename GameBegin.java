@@ -2,8 +2,6 @@ package main;
 
 public class GameBegin {
 	
-	
-	
 	private int round;
 	
 	public GameBegin(int round) {
