@@ -29,11 +29,25 @@ public class Calculator {
 		int userJack = 0;
 		int computerJack = 0;
 		
+		for (int i = 0; i < collectedUserCards.length; i++) {
+			if (collectedUserCards[i] == (null)) {
+				collectedUserCards[i] = "  ";
+			}
+			
+		}
+		
+		for (int i = 0; i < collectedComputerCards.length; i++) {
+			if (collectedComputerCards[i]== null) {
+				collectedComputerCards[i] = "  ";
+			}
+			
+		}
+		
 		if (collectedUserCards.length > collectedComputerCards.length) {
 			userScore +=3;
 		}
-		else if (collectedUserCards.length > collectedComputerCards.length) {
-			userScore +=0;
+		else if (collectedComputerCards.length > collectedUserCards.length) {
+			computerScore +=3;
 		}
 		else {
 			computerScore += 3;
@@ -45,31 +59,31 @@ public class Calculator {
 			computerScore += computerPisti*3;
 		}
 		for (int i = 0; i<collectedUserCards.length; i++ ) {
-			if (collectedUserCards[i] == "Diamonds 10") {
+			if (collectedUserCards[i].equals("Diamonds 10")) {
 				userDiamonds10 ++;
 			}
-			if (collectedUserCards[i] == "Clubs 2") {
+			if (collectedUserCards[i].equals("Clubs 2")) {
 				userClubs2 ++;
 			}
-			if (collectedUserCards[i] == "Clubs Ace" || collectedUserCards[i] == "Spades Ace" || collectedUserCards[i] == "Diamonds Ace" || collectedUserCards[i] == "Hearts Ace") {
+			if (collectedUserCards[i].equals("Clubs Ace") || collectedUserCards[i].equals("Spades Ace") || collectedUserCards[i].equals("Diamonds Ace") || collectedUserCards[i].equals("Hearts Ace")) {
 				userAce ++;
 			}
-			if (collectedUserCards[i] == "Clubs Jack" || collectedUserCards[i] == "Spades Jack" || collectedUserCards[i] == "Diamonds Jack" || collectedUserCards[i] == "Hearts Jack") {
+			if (collectedUserCards[i].equals("Clubs Jack") || collectedUserCards[i].equals("Spades Jack") || collectedUserCards[i].equals("Diamonds Jack") || collectedUserCards[i].equals("Hearts Jack")) {
 				userJack ++;
 			}
 			
 		}
 		for (int i = 0; i<collectedComputerCards.length; i++ ) {
-			if (collectedComputerCards[i] == "Diamonds 10") {
+			if (collectedComputerCards[i].equals("Diamonds 10")) {
 				computerDiamonds10 ++;
 			}
-			if (collectedComputerCards[i] == "Clubs 2") {
+			if (collectedComputerCards[i].equals("Clubs 2")) {
 				computerClubs2 ++;
 			}
-			if (collectedComputerCards[i] == "Clubs Ace" || collectedComputerCards[i] == "Spades Ace" || collectedComputerCards[i] == "Diamonds Ace" || collectedComputerCards[i] == "Hearts Ace") {
+			if (collectedComputerCards[i].equals("Clubs Ace") || collectedComputerCards[i].equals("Spades Ace") || collectedComputerCards[i].equals("Diamonds Ace") || collectedComputerCards[i].equals("Hearts Ace")) {
 				computerAce ++;
 			}
-			if (collectedComputerCards[i] == "Clubs Jack" || collectedComputerCards[i] == "Spades Jack" || collectedComputerCards[i] == "Diamonds Jack" || collectedComputerCards[i] == "Hearts Jack") {
+			if (collectedComputerCards[i].equals("Clubs Jack") || collectedComputerCards[i].equals("Spades Jack") || collectedComputerCards[i].equals("Diamonds Jack") || collectedComputerCards[i].equals("Hearts Jack")) {
 				computerJack ++;
 			}
 			
