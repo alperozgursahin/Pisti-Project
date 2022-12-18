@@ -3,34 +3,52 @@ package main;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Formatter;
+
 
 public class ScoreBoard {
 	
+	private String name;
+	private int score;
 	
+
 	 public void scoreWriter(int score, String name) {
-		  
-
-		 /* int min = 1000;
-		  int[] scores = new int[9];
-		  for (int i = 0 ; i<scores.length; i++) {
-			  if (scores[i] < min) {
-				  min = scores[i];
-			  }
-		  }*/
+		 this.setName(name);
+		 this.setScore(score);
 		 
-		  File file = new File("C:\\Users\\alper\\Desktop\\PistiProject\\SE-115-Project\\Scores.txt");
-		  try {
-			FileWriter writer = new FileWriter(file);
-			writer.append(name+"'s score is: "+score);
-			writer.close();
+		
+		 Formatter f = null;
+		 FileWriter fw = null;
+		 try {
+			 fw = new FileWriter ("C:\\Users\\alper\\Desktop\\PistiProject\\SE-115-Project\\Scores.txt" , true);
+			 f = new Formatter (fw);
+			 f. format("\n" + "Name: "+ getName() +"| Score: "+ getScore() );
+			 fw. close();
+		 } catch (Exception e) {
+		 System.err.println("Something went wrong." );
+		 } finally {
+		 if (f != null) {
+		 f. close();
+		 }
+	 }
+	 
+	
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		  
-	  }
-	  }
+}
 
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+}

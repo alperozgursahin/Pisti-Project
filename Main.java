@@ -1,30 +1,29 @@
 package main;
 
-import java.util.Scanner;
 
 public class Main {
 	
 	public static int round = 1;
 	public static int running = 1;
-	public static boolean computerTurn;
+	
 	public static int lastIndex;
 	public static int insideCounter;
 	public static int computerRandomPlayCounter;
 	public static int insideCounter3;
 	
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("What is your name?: ");
-		String username = scanner.next();
+		
 		
 		Deck deck = new Deck();
-		Calculator calculator = new Calculator(deck.getCollectedUserCards(), deck.getCollectedComputerCards());
+		Calculator calculator = new Calculator();
 		String[] deck1 = deck.DeckOfCard();
 		GameEnd gameEnd = new GameEnd();
+		GameBegin gameBegin = new GameBegin();
 		ScoreBoard scoreBoard = new ScoreBoard();
 		//GameProgress gameProgress = new GameProgress();
 		//GameBegin gameBegin = new GameBegin(round);
 		
+		gameBegin.getUserName();
 		deck.ShuffleCards(deck1);
 		deck.cutDeck(deck1);
 		deck.floorPlacement(deck1);
@@ -32,15 +31,9 @@ public class Main {
 		
 		while (round < 7) {
 			
-			GameBegin gameBegin = new GameBegin(round);
-			gameBegin.begin();
+			gameBegin.begin(round);
 			deck.dealCards(deck1, round);
-			computerTurn = false;
-			lastIndex = 3;
-			insideCounter = 0;
-			insideCounter3 = 0;
-			computerRandomPlayCounter = 4;
-			
+
 			
 			while (running < 5) {
 				
@@ -52,11 +45,13 @@ public class Main {
 			running = 1;
 			
 		}
+		deck.collectLastCards(deck.getLastWin());
+		
 		calculator.calculator(deck.getCollectedUserCards(), deck.getCollectedComputerCards());
 		gameEnd.scoreBoard(calculator.getUserScore(),calculator.getComputerScore());
-		if (calculator.getUserScore() > calculator.getComputerScore()) {
-			scoreBoard.scoreWriter(calculator.winnerScore(), username);
-		}
+		
+		scoreBoard.scoreWriter(calculator.winnerScore(), gameBegin.getUsername());
+		
 		
 		
 		

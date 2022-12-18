@@ -8,10 +8,7 @@ public class Calculator {
 	private String[] collectedUserCards;
 	private String[] collectedComputerCards;
 	
-	public Calculator(String[] collectedUserCards, String[] collectedComputerCards) {
-		this.setCollectedUserCards(collectedUserCards);
-		this.setCollectedComputerCards(collectedComputerCards);
-	}
+	
 	public int getUserScore() {
 		return userScore;
 	}

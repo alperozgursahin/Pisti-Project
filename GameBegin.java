@@ -1,23 +1,46 @@
 package main;
 
+import java.util.Scanner;
+
 public class GameBegin {
 	
-	private int round;
+	private String username;
+	public int lastIndex;
+	public int insideCounter;
+	public int insideCounter3;
+	public int computerRandomPlayCounter;
 	
-	public GameBegin(int round) {
-		this.round = round;
+	Scanner scanner = new Scanner(System.in);
+	
+	
+	
+	public GameBegin() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public int getRound() {
-		return round;
+	public void getUserName() {
+		
+		System.out.println("What is your name?: ");
+		username = scanner.next();
+		
 	}
 
-	public void setRound(int round) {
-		this.round = round;
-	}
-	public void begin() {
-		System.out.println("Round "+getRound());
+	public void begin(int round) {
+		System.out.println("Round "+round);
 		System.out.println("✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤");
+		lastIndex = 3;
+		insideCounter = 0;
+		insideCounter3 = 0;
+		computerRandomPlayCounter = 4;
+		
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

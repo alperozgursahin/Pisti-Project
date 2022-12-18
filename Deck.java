@@ -29,6 +29,7 @@ public class Deck {
 	private static boolean computerTurn;
 	private static Random random = new Random();
 	private static Scanner scanner = new Scanner(System.in);
+	private static int lastWin; 
 	
 	
 	public String[] getCollectedUserCards() {
@@ -127,7 +128,7 @@ public class Deck {
 		String temp2 = "  ";
 		temp2 = computerCards[lastIndex];			//Organising Computer Cards
 		computerCards[i] = temp2;
-		computerCards[lastIndex] = "  ";
+		computerCards[lastIndex] = "    ";
 		computerRandomPlayCounter --;
 		insideCounter3++;
 	}
@@ -163,13 +164,14 @@ public void gameRun() {
 
 		
 		if (floorCardsNumber > 0 ) {
-			if (lastCard[0].substring(lastCard[0].length()-2,lastCard[0].length()).equals(LastFloorCard.substring(LastFloorCard.length()-2, LastFloorCard.length()))) {  //Checks last 2 index 
+			if (lastCard[0].substring(lastCard[0].length()-2,lastCard[0].length()).equals(LastFloorCard.substring(LastFloorCard.length()-2, LastFloorCard.length())))  {  //Checks last 2 index 
 				if (floorCardsNumber == 1) {
 					setUserPisti(getUserPisti() + 1) ;
 					System.out.println("You made a pisti. Bravo!");
 					floorCardsNumber = 0;
 					LastFloorCard = "    ";
 					floor[0] = "  ";
+					setLastWin(0);
 				}
 				else {
 					for (int i = 0 ; i <floorCardsNumber  ; i++) {
@@ -180,6 +182,7 @@ public void gameRun() {
 					floorCardsNumber = 0;
 					LastFloorCard = "    ";
 					System.out.println("You collected all cards.");
+					setLastWin(0);
 				}
 				
 			} 
@@ -189,6 +192,7 @@ public void gameRun() {
 					System.out.println("You made a pisti. Bravo!");
 					floorCardsNumber = 0;
 					LastFloorCard = "    ";
+					setLastWin(0);
 				}
 				else {
 					for (int i = 0 ; i < floorCardsNumber; i++) {
@@ -199,10 +203,15 @@ public void gameRun() {
 					collectedUserCardsNumber += floorCardsNumber;
 					floorCardsNumber = 0;
 					LastFloorCard = "    ";
+					setLastWin(0);
 				}
 			}
 
-			
+			else {
+				LastFloorCard = lastCard[0];
+				floor[floorCardsNumber] = lastCard[0];
+				floorCardsNumber++;
+			}
 		}
 		else {
 			LastFloorCard = lastCard[0];
@@ -234,6 +243,7 @@ public void gameRun() {
 								floor[0] = "  ";
 								floorCardsNumber = 0;
 								LastFloorCard = "    ";
+								setLastWin(1);
 								organizeComputerCards(computerCards,i);
 							
 								computerTurn = false;
@@ -249,6 +259,7 @@ public void gameRun() {
 								collectedComputerCardsNumber += floorCardsNumber;
 								floorCardsNumber = 0;
 								LastFloorCard = "    ";
+								setLastWin(1);
 								
 								organizeComputerCards(computerCards,i);
 								computerTurn = false;
@@ -261,8 +272,51 @@ public void gameRun() {
 				} 
 			}
 			if (computerTurn && floorCardsNumber > 0) {				//Checks Jack's
-					for (int i = 0; i< computerCards.length ; i++) {
-						if (computerCards[i].equals("Clubs Jack")) {
+					for (int i = 0; i< computerCards.length-insideCounter3 ; i++) {
+						
+						if (computerCards[i].substring(computerCards[i].length()-4, computerCards[i].length()).equals("Jack") ) {
+							if (floorCardsNumber == 1 && LastFloorCard.substring(LastFloorCard.length()-4, LastFloorCard.length()).equals("Jack")) {
+								setComputerPisti(getComputerPisti() + 1);
+								
+								System.out.println("The computer made pisti!!");
+								
+								floor[0] = "  ";
+								collectedComputerCardsNumber += floorCardsNumber;
+								
+								floorCardsNumber = 0;
+								LastFloorCard = "    ";
+								setLastWin(1);
+								
+								organizeComputerCards(computerCards,i);
+								computerTurn = false;
+								break;
+							}
+							else {
+								for (int j = 0; j < floorCardsNumber ; j++) {
+									collectedComputerCards[j+collectedComputerCardsNumber] = floor[j]; 
+									floor[j] = "  ";
+								}		
+								System.out.println("The computer collected all cards!!");
+								collectedComputerCardsNumber += floorCardsNumber;
+								
+								floorCardsNumber = 0;
+								LastFloorCard = "    ";
+								setLastWin(1);
+								
+								organizeComputerCards(computerCards,i);
+								computerTurn = false;
+								break;
+								
+							}
+							
+						}
+						
+						
+						
+					
+						
+						
+						/*if (computerCards[i].equals("Clubs Jack")) {
 							if (floorCardsNumber == 1 && LastFloorCard.substring(LastFloorCard.length()-4, LastFloorCard.length()).equals("Jack")) {
 								setComputerPisti(getComputerPisti() + 1);	
 								System.out.println("The computer made pisti!!");
@@ -271,6 +325,7 @@ public void gameRun() {
 								collectedComputerCardsNumber += floorCardsNumber;
 								floorCardsNumber = 0;
 								LastFloorCard = "    ";
+								lastWin = 1;
 								
 								organizeComputerCards(computerCards,i);
 								computerTurn = false;
@@ -288,6 +343,7 @@ public void gameRun() {
 								
 								floorCardsNumber = 0;
 								LastFloorCard = "    ";
+								lastWin = 1;
 								
 								organizeComputerCards(computerCards,i);
 								computerTurn = false;
@@ -305,6 +361,7 @@ public void gameRun() {
 								
 								floorCardsNumber = 0;
 								LastFloorCard = "    ";
+								lastWin = 1;
 								organizeComputerCards(computerCards,i);
 								
 								computerTurn = false;
@@ -322,6 +379,7 @@ public void gameRun() {
 								computerCards[i] = "  ";
 								floorCardsNumber = 0;
 								LastFloorCard = "    ";
+								lastWin = 1;
 								organizeComputerCards(computerCards,i);
 								
 								computerTurn = false;
@@ -340,6 +398,7 @@ public void gameRun() {
 								
 								floorCardsNumber = 0;
 								LastFloorCard = "    ";
+								lastWin = 1;
 								organizeComputerCards(computerCards,i);
 								computerTurn = false;
 								break;
@@ -355,6 +414,7 @@ public void gameRun() {
 								
 								floorCardsNumber = 0;
 								LastFloorCard = "    ";
+								lastWin = 1;
 								
 								organizeComputerCards(computerCards,i);
 								
@@ -363,7 +423,7 @@ public void gameRun() {
 							}
 							
 						}
-						if (computerCards[i].equals("Hearts Jack")) {
+						if (computerCards[i].equals("Hearts Jack")) {		computerCards[i].substring(computerCards[i].length()-4, computerCards[i].length()).equals("Jack")
 							if (floorCardsNumber == 1 && LastFloorCard.substring(LastFloorCard.length()-4, LastFloorCard.length()).equals("Jack")) {
 								setComputerPisti(getComputerPisti() + 1);
 								
@@ -374,6 +434,7 @@ public void gameRun() {
 								
 								floorCardsNumber = 0;
 								LastFloorCard = "    ";
+								lastWin = 1;
 								
 								organizeComputerCards(computerCards,i);
 								computerTurn = false;
@@ -391,18 +452,18 @@ public void gameRun() {
 								
 								floorCardsNumber = 0;
 								LastFloorCard = "    ";
+								lastWin = 1;
 								organizeComputerCards(computerCards,i);
 								computerTurn = false;
 								break;
 							}
 							
-						}
+						}*/
+						
 						
 						
 					}
-				
-				
-				
+							
 				
 			}
 			
@@ -411,6 +472,7 @@ public void gameRun() {
 				LastFloorCard = computerCards[computerRandomPlay];
 				floor[floorCardsNumber] = computerCards[computerRandomPlay];
 				floorCardsNumber ++;
+				computerTurn = false;
 				
 		
 				organizeComputerCards(computerCards,computerRandomPlay);
@@ -449,6 +511,36 @@ public int getComputerPisti() {
 }
 public void setComputerPisti(int computerPisti) {
 	Deck.computerPisti = computerPisti;
+}
+public int getLastWin() {
+	return lastWin;
+}
+public static void setLastWin(int lastWin) {
+	Deck.lastWin = lastWin;
+}
+public void collectLastCards(int lastwin) {
+	if (lastwin == 0) {
+		for (int i = 0 ; i <floorCardsNumber  ; i++) {
+			collectedUserCards[i+collectedUserCardsNumber] = floor[i];
+			floor[i] = "  ";
+		}
+		collectedUserCardsNumber += floorCardsNumber;
+		floorCardsNumber = 0;
+		LastFloorCard = "    ";
+		System.out.println("You collected all last cards.");
+		
+	}
+	if (lastwin == 1) {
+		for (int i = 0 ; i <floorCardsNumber  ; i++) {
+			collectedComputerCards[i+collectedComputerCardsNumber] = floor[i];
+			floor[i] = "  ";
+		}
+		collectedComputerCardsNumber += floorCardsNumber;
+		floorCardsNumber = 0;
+		LastFloorCard = "    ";
+		System.out.println("Computer collected all last cards.");
+		
+	}
 }
 	
 	
