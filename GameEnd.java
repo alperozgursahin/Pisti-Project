@@ -9,7 +9,7 @@ public class GameEnd {
 	
 	public void scoreBoard(int userScore, int computerScore) {
 		System.out.println("          U̲S̲E̲R̲ ̲S̲C̲O̲R̲E̲          C̲O̲M̲P̲U̲T̲E̲R̲ S̲C̲O̲R̲E̲");
-		System.out.println("              "+userScore+"                      "+computerScore
+		System.out.println("              "+userScore+"                     "+computerScore
 				);
 	}
 	public int getUserScore() {

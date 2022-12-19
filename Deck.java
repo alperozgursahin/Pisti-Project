@@ -115,8 +115,8 @@ public class Deck {
 	public void dealCards(String[] deck, int round) {		//DealCards
 		int k = 4*(round-1);
 		for (int i = 4*round; i<(8*round)-k; i++)  {
-			userCards[i-4*round] = deck[deck.length-1-i];
-			computerCards[i-4*round] = deck[deck.length-1-i-4];
+			userCards[i-4*round] = deck[deck.length-1-i-k];
+			computerCards[i-4*round] = deck[deck.length-1-i-4-k];
 		}
 		lastIndex = 3;
 		insideCounter = 0;
@@ -135,6 +135,11 @@ public class Deck {
 	
 public void gameRun() {
 		
+	
+	for (int i = 0; i < computerCards.length; i++) {
+		System.out.println("The computer cards: "+ computerCards[i]);
+	}
+	
 	System.out.println("Floor cards number is: "+floorCardsNumber);
 		String[] lastCard = new String[1];
 
@@ -161,6 +166,8 @@ public void gameRun() {
 		
 		lastCard[0] = userCards[userChoice-1];
 		
+		
+		
 
 		
 		if (floorCardsNumber > 0 ) {
@@ -171,7 +178,7 @@ public void gameRun() {
 					floorCardsNumber = 0;
 					LastFloorCard = "    ";
 					floor[0] = "  ";
-					setLastWin(0);
+					setLastWin(0);			//Sets last win to user.
 				}
 				else {
 					for (int i = 0 ; i <floorCardsNumber  ; i++) {
@@ -229,9 +236,8 @@ public void gameRun() {
 		
 		//Computer's first hand
 		
-		/*for (int i = 0; i < computerCards.length; i++) {
-			System.out.println("The computer cards: "+ computerCards[i]);
-		}*/
+		
+		
 			if (computerTurn) {
 				if (floorCardsNumber > 0) {
 					for (int i = 0; i< computerCards.length-insideCounter3 ; i++) {
@@ -251,6 +257,8 @@ public void gameRun() {
 								
 							}
 							else {
+								floorCardsNumber += 1;
+								floor[floorCardsNumber-1] = computerCards[i];
 								for (int j = 0; j < floorCardsNumber ; j++) {
 									collectedComputerCards[j+collectedComputerCardsNumber] = floor[j];
 									floor[j] = "  ";
@@ -487,6 +495,25 @@ public void gameRun() {
 				}*/
 				
 	
+			System.out.println("Collected User Cards: ");
+			for (int i = 0 ; i<collectedUserCards.length; i++) {
+				if (collectedUserCards[i] == null) {
+					continue;
+				}else {
+					System.out.println(collectedUserCards[i]);
+				}
+			}
+			System.out.println("Collected Computer Cards: ");
+			for (int i = 0 ; i<collectedComputerCards.length; i++) {
+				if (collectedComputerCards[i] == null) {
+					continue;
+				}else {
+					System.out.println(collectedComputerCards[i]);
+				}
+				
+			}
+			
+			
 			String temp = "  ";				//Organising User Cards
 			temp = userCards[lastIndex];
 			userCards[userChoice-1] = temp;
@@ -518,7 +545,9 @@ public int getLastWin() {
 public static void setLastWin(int lastWin) {
 	Deck.lastWin = lastWin;
 }
-public void collectLastCards(int lastwin) {
+
+
+public void collectLastCards(int lastwin) {			//Collecting the last cards by looking at who took the last cards from on the floor.
 	if (lastwin == 0) {
 		for (int i = 0 ; i <floorCardsNumber  ; i++) {
 			collectedUserCards[i+collectedUserCardsNumber] = floor[i];

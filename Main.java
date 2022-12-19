@@ -15,13 +15,13 @@ public class Main {
 		
 		
 		Deck deck = new Deck();
-		Calculator calculator = new Calculator();
 		String[] deck1 = deck.DeckOfCard();
+		
+		Calculator calculator = new Calculator();
 		GameEnd gameEnd = new GameEnd();
 		GameBegin gameBegin = new GameBegin();
 		ScoreBoard scoreBoard = new ScoreBoard();
-		//GameProgress gameProgress = new GameProgress();
-		//GameBegin gameBegin = new GameBegin(round);
+		
 		
 		gameBegin.getUserName();
 		deck.ShuffleCards(deck1);
@@ -34,9 +34,8 @@ public class Main {
 			gameBegin.begin(round);
 			deck.dealCards(deck1, round);
 
-			
 			while (running < 5) {
-				
+
 				deck.gameRun();
 				running++;
 
@@ -46,12 +45,12 @@ public class Main {
 			
 		}
 		deck.collectLastCards(deck.getLastWin());
-		
 		calculator.calculator(deck.getCollectedUserCards(), deck.getCollectedComputerCards());
 		gameEnd.scoreBoard(calculator.getUserScore(),calculator.getComputerScore());
 		
-		scoreBoard.scoreWriter(calculator.winnerScore(), gameBegin.getUsername());
-		
+		if (calculator.getUserScore() > calculator.getComputerScore()) {
+			scoreBoard.scoreWriter(calculator.winnerScore(), gameBegin.getUsername());
+		}
 		
 		
 		

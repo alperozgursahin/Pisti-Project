@@ -34,14 +34,14 @@ public class Calculator {
 		int userJack = 0;
 		int computerJack = 0;
 		
-		for (int i = 0; i < collectedUserCards.length; i++) {			//Null to empty String.
+		for (int i = 0; i < collectedUserCards.length; i++) {			//Changes index null to empty String.
 			if (collectedUserCards[i] == (null)) {
 				collectedUserCards[i] = "  ";
 			}
 			
 		}
 		
-		for (int i = 0; i < collectedComputerCards.length; i++) {		//Null to empty String.
+		for (int i = 0; i < collectedComputerCards.length; i++) {		//Changes index null to empty String.
 			if (collectedComputerCards[i]== null) {
 				collectedComputerCards[i] = "  ";
 			}
@@ -97,11 +97,13 @@ public class Calculator {
 		}
 		
 		
+		
+		
 		if (userDiamonds10 > 0 ) {
-			userScore += 10;
+			userScore += 3;
 		}
 		if (computerDiamonds10 > 0 ) {
-			computerScore += 10;
+			computerScore += 3;
 		}
 		if (userClubs2 > 0) {
 			userScore += 2;
@@ -109,7 +111,35 @@ public class Calculator {
 		if (computerClubs2 > 0) {
 			computerScore += 2;
 		}
-		if (userAce >0) {
+		
+		int userCardsLength = 0;
+		int computerCardsLength = 0;
+		
+		for (int i = 0; i < collectedUserCards.length ; i++) {
+			if (collectedUserCards[i].equals("  ")) {
+				break;
+			}
+				userCardsLength ++;
+		}
+		for (int i = 0; i < collectedComputerCards.length ; i++) {
+			if (collectedComputerCards[i].equals("  ")) {
+				break;
+			}
+			
+				computerCardsLength ++;
+			
+		}
+		
+		
+		for (int i = 0 ; i < userCardsLength - userDiamonds10 - userClubs2   ; i++) {		//Increase score 1 for every normal card
+			userScore += 1;
+		}
+		for (int i = 0 ; i < computerCardsLength - computerDiamonds10 - computerClubs2 ; i++) {		//Increase score 1 for every normal card
+			computerScore += 1;
+			
+		}
+		
+		/*if (userAce >0) {				//Other pisti scoring.
 			userScore += userAce*1;
 		}
 		if (computerAce >0) {
@@ -120,7 +150,8 @@ public class Calculator {
 		}
 		if (computerJack > 0) {
 			computerScore += computerJack*1;
-		}
+		}*/
+		
 		//System.out.println("User Score is: "+userScore+" Computer Score is: "+computerScore);
 		if (userScore == computerScore) {
 			System.out.println("DRAW!");
