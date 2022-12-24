@@ -197,6 +197,7 @@ public class Calculator {
 	}
 	public int winnerScore() {
 		int score = 0;
+		
 		if (userScore > computerScore) {
 			score = userScore;
 		}

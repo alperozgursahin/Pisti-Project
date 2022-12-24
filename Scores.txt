@@ -4,4 +4,5 @@ Name: alper| Score: 24
 Name: ömer| Score: 65
 Name: ömer| Score: 55
 Name: gokberk| Score: 38
-Name: emhan| Score: 26
+Name: emirhan emmamme| Score: 26
+Name: alper| Score: 30

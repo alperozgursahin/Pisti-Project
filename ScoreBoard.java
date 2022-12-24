@@ -11,17 +11,20 @@ public class ScoreBoard {
 	private String name;
 	private int score;
 	
+	
 
 	 public void scoreWriter(int score, String name) {
 		 this.setName(name);
 		 this.setScore(score);
+
 		 
-		
 		 Formatter f = null;
 		 FileWriter fw = null;
 		 try {
+			 
 			 fw = new FileWriter ("C:\\Users\\alper\\Desktop\\PistiProject\\SE-115-Project\\Scores.txt" , true);
 			 f = new Formatter (fw);
+		
 			 f. format("\n" + "Name: "+ getName() +"| Score: "+ getScore() );
 			 fw. close();
 		 } catch (Exception e) {
@@ -51,4 +54,6 @@ public class ScoreBoard {
 	public void setScore(int score) {
 		this.score = score;
 	}
+
+
 }
