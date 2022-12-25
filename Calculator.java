@@ -195,19 +195,25 @@ public class Calculator {
 	public void setCollectedComputerCards(String[] collectedComputerCards) {
 		this.collectedComputerCards = collectedComputerCards;
 	}
-	public int winnerScore() {
-		int score = 0;
+	public String winnerScore() {
+		String score = null;
+		
 		
 		if (userScore > computerScore) {
-			score = userScore;
+			score = Integer.toString(userScore);
 		}
 		if (computerScore > userScore ) {
-			score = computerScore;
+			score = Integer.toString(computerScore);
 		}
 		if (userScore == computerScore) {
-			score = userScore;
+			score = Integer.toString(userScore);
 		}
 		return score;
+		
+	}
+	public String userScore() {
+		Integer.toString(userScore);
+		return "0"+userScore;
 		
 	}
 	

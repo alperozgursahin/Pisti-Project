@@ -1,8 +1,5 @@
-
-Name: alper| Score: 55
-Name: alper| Score: 24
-Name: ömer| Score: 65
-Name: ömer| Score: 55
-Name: gokberk| Score: 38
-Name: emirhan emmamme| Score: 26
-Name: alper| Score: 30
+Name: tuna| Score: 048
+Name: alper| Score: 022
+Name: omer| Score: 018
+Name: ilayda| Score: 015
+Name: gokberk| Score: 014

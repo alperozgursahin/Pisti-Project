@@ -65,14 +65,32 @@ public class Deck {
 	
 	public void cutDeck(String[] deck) {			//Asks user where to cut the deck.
 		
-	    System.out.println("Cut please. 'Choose between 1-" + (deck.length - 1) + "'");
-	    int cutPoint = scanner.nextInt();
 	    
-	    // Check that the cut point is within the valid range for the deck size
-	    if (cutPoint < 1 || cutPoint >= deck.length) {
-	        System.out.println("Invalid cut point. Please try again.");
-	        return;
+	    boolean flag = true;
+	    int cutPoint = 0;
+	    while (flag) {
+	    	 System.out.println("Cut please. 'Choose between 1-" + (deck.length - 1) + "'");
+	    	 String OtherCutPoint = scanner.next();
+	    	try {
+	    		cutPoint = Integer.parseInt(OtherCutPoint);
+	    	}
+	    	catch(Exception e) {
+	    		System.out.println("Please enter a valid value; ");
+	    		continue;
+	    	}
+	    	// Check that the cut point is within the valid range for the deck size
+	    	if (cutPoint < 1 || cutPoint >= deck.length) {
+		        System.out.println("Invalid cut point. Please try again.");
+		        continue;
+		    }
+	    	else {
+	    		flag = false;
+	    	}
 	    }
+	    
+	    
+	    
+	    
 	    
 	    // Create the top and bottom halves of the deck
 	    String[] topDeck = new String[cutPoint];

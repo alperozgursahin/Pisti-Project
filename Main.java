@@ -48,9 +48,9 @@ public class Main {
 		calculator.calculator(deck.getCollectedUserCards(), deck.getCollectedComputerCards());
 		gameEnd.scoreBoard(calculator.getUserScore(),calculator.getComputerScore());
 		
-		if (calculator.getUserScore() > calculator.getComputerScore()) {
-			scoreBoard.scoreWriter(calculator.winnerScore(), gameBegin.getUsername());
-		}
+		
+		scoreBoard.scoreWriter(calculator.userScore(), gameBegin.getUsername());
+		scoreBoard.getUserScores();
 		
 		
 		
