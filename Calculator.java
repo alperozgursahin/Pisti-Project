@@ -24,11 +24,12 @@ public class Calculator {
 		userPisti = deck.getUserPisti();
 		computerPisti = deck.getComputerPisti();
 				
-		
 		int userDiamonds10 = 0;
 		int computerDiamonds10 = 0;
 		int userClubs2 = 0;
 		int computerClubs2 = 0;
+		
+		//Other scoring part
 		int userAce = 0;
 		int computerAce = 0;
 		int userJack = 0;
@@ -38,16 +39,13 @@ public class Calculator {
 			if (collectedUserCards[i] == (null)) {
 				collectedUserCards[i] = "  ";
 			}
-			
 		}
 		
 		for (int i = 0; i < collectedComputerCards.length; i++) {		//Changes index null to empty String.
 			if (collectedComputerCards[i]== null) {
 				collectedComputerCards[i] = "  ";
 			}
-			
 		}
-		
 		
 		for (int i = 0; i<collectedUserCards.length; i++ ) {			
 			if (collectedUserCards[i].equals("Diamonds 10")) {
@@ -96,9 +94,6 @@ public class Calculator {
 			computerScore += computerPisti*10;
 		}
 		
-		
-		
-		
 		if (userDiamonds10 > 0 ) {
 			userScore += 3;
 		}
@@ -121,22 +116,20 @@ public class Calculator {
 			}
 				userCardsLength ++;
 		}
+		
 		for (int i = 0; i < collectedComputerCards.length ; i++) {
 			if (collectedComputerCards[i].equals("  ")) {
 				break;
 			}
-			
 				computerCardsLength ++;
-			
 		}
-		
-		
-		for (int i = 0 ; i < userCardsLength - userDiamonds10 - userClubs2   ; i++) {		//Increase score 1 for every normal card
+		//Increase score 1 for every normal card
+		for (int i = 0 ; i < userCardsLength - userDiamonds10 - userClubs2   ; i++) {		
 			userScore += 1;
 		}
-		for (int i = 0 ; i < computerCardsLength - computerDiamonds10 - computerClubs2 ; i++) {		//Increase score 1 for every normal card
+		//Increase score 1 for every normal card
+		for (int i = 0 ; i < computerCardsLength - computerDiamonds10 - computerClubs2 ; i++) {		
 			computerScore += 1;
-			
 		}
 		
 		/*if (userAce >0) {				//Other pisti scoring.
@@ -164,25 +157,53 @@ public class Calculator {
 			
 		}
 		
+		//Shows collected user cards
 		
-		System.out.println("User Cards: ");
+		/*System.out.println("User Cards: ");
 		for (int i = 0; i<collectedUserCards.length; i++) {
 			if (collectedUserCards[i].equals("  ")) {
 				continue;
 			}
 			System.out.println(collectedUserCards[i]);
-		}
+		}*/
 		System.out.println("User's Pisti: "+userPisti);
 		
-		System.out.println("Computer Cards:");
+		
+		//Shows collected computer cards
+		
+		/*System.out.println("Computer Cards:");
 		for (int i = 0; i<collectedComputerCards.length; i++) {
 			if (collectedComputerCards[i].equals("  ")) {
 				continue;
 			}
 			System.out.println(collectedComputerCards[i]);
-		}
+		}*/
 		System.out.println("Computer's Pisti: "+computerPisti);
 	}
+	
+	public String winnerScore() {
+		String score = null;
+		if (userScore > computerScore) {
+			score = Integer.toString(userScore);
+		}
+		if (computerScore > userScore ) {
+			score = Integer.toString(computerScore);
+		}
+		if (userScore == computerScore) {
+			score = Integer.toString(userScore);
+		}
+		return score;
+	}
+	public String userScore() {
+		
+		String newUserScore = Integer.toString(userScore);
+		if(newUserScore.length() == 1) {
+			return "00"+newUserScore;
+		}
+		return "0"+newUserScore;
+		
+	}
+	
 	public String[] getCollectedUserCards() {
 		return collectedUserCards;
 	}
@@ -194,27 +215,6 @@ public class Calculator {
 	}
 	public void setCollectedComputerCards(String[] collectedComputerCards) {
 		this.collectedComputerCards = collectedComputerCards;
-	}
-	public String winnerScore() {
-		String score = null;
-		
-		
-		if (userScore > computerScore) {
-			score = Integer.toString(userScore);
-		}
-		if (computerScore > userScore ) {
-			score = Integer.toString(computerScore);
-		}
-		if (userScore == computerScore) {
-			score = Integer.toString(userScore);
-		}
-		return score;
-		
-	}
-	public String userScore() {
-		Integer.toString(userScore);
-		return "0"+userScore;
-		
 	}
 	
 }

@@ -16,6 +16,7 @@ public class ScoreBoard {
 	
 
 	 public void scoreWriter(String score, String name) {
+		 
 		 this.setName(name);
 		 this.setScore(score);
 		 
@@ -25,35 +26,17 @@ public class ScoreBoard {
 					Scanner scanner = new Scanner(new File("C:\\Users\\alper\\Desktop\\PistiProject\\SE-115-Project\\Scores.txt"));
 
 					while (scanner.hasNextLine()) {
-						userScores[counter] = scanner.nextLine();
-						counter++;
+						userScores[counter++] = scanner.nextLine();
+						
 					}
 
 					scanner.close();
 				} catch (Exception e) {
-					System.out.println("Something went wrong!");
+					System.out.println("File does not exists! Created a new one.");
 				}
 			 
-		String temp = null;
-		//Sort User Scores
-		for (int i = 0; i<userScores.length;i++ ) {
-			if (userScores[i] == null) {
-				break;
-			}
-			for (int j = i+1; j<userScores.length; j++) {
-				if(userScores[j] == null) {
-					break;
-				}
-				 if (Integer.parseInt(userScores[i].substring(userScores[i].length()-3, userScores[i].length())) < Integer.parseInt(userScores[j].substring(userScores[j].length()-3, userScores[j].length()))) {
-					 temp = userScores[i];
-					 userScores[i] = userScores[j];
-					 userScores[j] = temp;
-					 
-				 }
-			}
-		}
-			 
-		 deleteWords();
+		sortUserScore();	
+		deleteWords();
 		 
 		 boolean isItFull = true;
 		 
@@ -68,96 +51,18 @@ public class ScoreBoard {
 			 }
 		 }
 		 
-		 for (int i = 0; i<userScores.length;i++ ) {
-			 if(userScores[i] == null) {
-				 break;
-			 }
-				for (int j = i+1; j<userScores.length; j++) {
-					if(userScores[j] == null) {
-						break;
-					}
-					 if (Integer.parseInt(userScores[i].substring(userScores[i].length()-3, userScores[i].length())) < Integer.parseInt(userScores[j].substring(userScores[j].length()-3, userScores[j].length()))) {
-						 temp = userScores[i];
-						 userScores[i] = userScores[j];
-						 userScores[j] = temp;
-						 
-					 }
-				}
-			}
+		 sortUserScore();	
 		 
 		 if (isItFull) {
-			 userScores[9] =  "Name: "+ getName() +"| Score: "+ getScore();
-		 }
-		 
-		 for (int i = 0; i<userScores.length;i++ ) {
-			 if (userScores[i] == null) {
-				 break;
-			 }
-				for (int j = i+1; j<userScores.length; j++) {
-					 if (userScores[j] == null) {
-						 break;
-					 }
-					 if (Integer.parseInt(userScores[i].substring(userScores[i].length()-3, userScores[i].length())) < Integer.parseInt(userScores[j].substring(userScores[j].length()-3, userScores[j].length()))) {
-						 temp = userScores[i];
-						 userScores[i] = userScores[j];
-						 userScores[j] = temp;
-						 
-					 }
-				}
-			}
-		 
-		 
-		 /*for (int i = 0; i<userScores.length; i++) {
-			 if (userScores[i] == null) {
-				 isItFull = false;
-				 userScores[i] = "Name: "+ getName() +"| Score: "+ getScore() ;
-				 for (int j = i+1 ; j<= userScores.length; j++) {
-					 if (userScores[j-1] == null) {
-						 break;
-					 }
-					 else {
-						 try {
-							 if (Integer.parseInt(userScores[i].substring(userScores[i].length()-3, userScores[i].length())) < Integer.parseInt(userScores[j].substring(userScores[j].length()-3, userScores[j].length()))) {
-								 temp = userScores[i];
-								 userScores[i] = userScores[j];
-								 userScores[j] = temp;
-								 
-							 }
-							 
-						 }
-						 catch (Exception e) {
-							 
-						 }
-					 }
-					
-				 }
-				 
+			 if (Integer.parseInt(userScores[9].substring(userScores[9].length()-3, userScores[9].length())) < Integer.parseInt(getScore())) {
+				 userScores[9] =  "Name: "+ getName() +" | Score: "+ getScore();
 			 }
 			 
-			 
 		 }
-		 if (isItFull) {
-			 for (int i = 0; i <userScores.length; i++) {
-				 if (Integer.parseInt(userScores[i].substring(userScores[i].length()-3, userScores[i].length())) < Integer.parseInt(score)) {
-					 userScores[i] = "Name: "+ getName() +"| Score: "+ getScore()+"\n";
-					 for (int j = i+1; j<=userScores.length; j++) {
-						 try {
-							 temp = userScores[i];
-							 userScores[i] = userScores[j];
-							 userScores[j] = temp;
-						 }
-						 catch (Exception e ) {
-							 continue;
-						 }
-						 
-						 
-					 }
-	
-				 }
-			 }
-		 }*/
 		 
+		 sortUserScore();		 
 		 
+ 
 		 Formatter f = null;
 		 FileWriter fw = null;
 		 try {
@@ -181,11 +86,8 @@ public class ScoreBoard {
 		 f. close();
 		 }
 	 }
-	 
-	
 
 }
-	 
 		  public static void deleteWords() {
 			  
 		    // Create a File object representing the text file you want to modify
@@ -207,6 +109,26 @@ public class ScoreBoard {
 		    writer.close();
 		  }
 		
+		  
+	public void sortUserScore() {
+		String temp = null;
+		for (int i = 0; i<userScores.length;i++ ) {
+			if (userScores[i] == null) {
+				break;
+			}
+			for (int j = i+1; j<userScores.length; j++) {
+				if(userScores[j] == null) {
+					break;
+				}
+				 if (Integer.parseInt(userScores[i].substring(userScores[i].length()-3, userScores[i].length())) < Integer.parseInt(userScores[j].substring(userScores[j].length()-3, userScores[j].length()))) {
+					 temp = userScores[i];
+					 userScores[i] = userScores[j];
+					 userScores[j] = temp;
+					 
+				 }
+			}
+		}
+	}
 	
 	public void getUserScores() {
 		for (int i = 0; i<userScores.length; i++) {
