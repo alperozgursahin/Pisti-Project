@@ -30,10 +30,10 @@ public class Calculator {
 		int computerClubs2 = 0;
 		
 		//Other scoring part
-		int userAce = 0;
+		/*int userAce = 0;
 		int computerAce = 0;
 		int userJack = 0;
-		int computerJack = 0;
+		int computerJack = 0;*/
 		
 		for (int i = 0; i < collectedUserCards.length; i++) {			//Changes index null to empty String.
 			if (collectedUserCards[i] == (null)) {
@@ -54,12 +54,12 @@ public class Calculator {
 			if (collectedUserCards[i].equals("Clubs 2")) {
 				userClubs2 ++;
 			}
-			if (collectedUserCards[i].equals("Clubs Ace") || collectedUserCards[i].equals("Spades Ace") || collectedUserCards[i].equals("Diamonds Ace") || collectedUserCards[i].equals("Hearts Ace")) {
+			/*if (collectedUserCards[i].equals("Clubs Ace") || collectedUserCards[i].equals("Spades Ace") || collectedUserCards[i].equals("Diamonds Ace") || collectedUserCards[i].equals("Hearts Ace")) {
 				userAce ++;
 			}
 			if (collectedUserCards[i].equals("Clubs Jack") || collectedUserCards[i].equals("Spades Jack") || collectedUserCards[i].equals("Diamonds Jack") || collectedUserCards[i].equals("Hearts Jack")) {
 				userJack ++;
-			}
+			}*/
 			
 		}
 		for (int i = 0; i<collectedComputerCards.length; i++ ) {
@@ -69,12 +69,12 @@ public class Calculator {
 			if (collectedComputerCards[i].equals("Clubs 2")) {
 				computerClubs2 ++;
 			}
-			if (collectedComputerCards[i].equals("Clubs Ace") || collectedComputerCards[i].equals("Spades Ace") || collectedComputerCards[i].equals("Diamonds Ace") || collectedComputerCards[i].equals("Hearts Ace")) {
+			/*if (collectedComputerCards[i].equals("Clubs Ace") || collectedComputerCards[i].equals("Spades Ace") || collectedComputerCards[i].equals("Diamonds Ace") || collectedComputerCards[i].equals("Hearts Ace")) {
 				computerAce ++;
 			}
 			if (collectedComputerCards[i].equals("Clubs Jack") || collectedComputerCards[i].equals("Spades Jack") || collectedComputerCards[i].equals("Diamonds Jack") || collectedComputerCards[i].equals("Hearts Jack")) {
 				computerJack ++;
-			}
+			}*/
 			
 		}
 		

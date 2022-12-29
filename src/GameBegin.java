@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class GameBegin {
 	
 	private String username;
-	public int lastIndex;
-	public int insideCounter;
-	public int insideCounter3;
-	public int computerRandomPlayCounter;
+	private int lastIndex;
+	private int insideCounter;
+	private int cpPlayedCardNumber;
+	private int computerRandomPlayCounter;
 	
 	Scanner scanner = new Scanner(System.in);
 	
@@ -28,10 +28,10 @@ public class GameBegin {
 	public void begin(int round) {
 		System.out.println("Round "+round);
 		System.out.println("✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤✤");
-		lastIndex = 3;
-		insideCounter = 0;
-		insideCounter3 = 0;
-		computerRandomPlayCounter = 4;
+		setLastIndex(3);
+		setInsideCounter(0);
+		setCpPlayedCardNumber(0);
+		setComputerRandomPlayCounter(4);
 		
 	}
 
@@ -41,6 +41,38 @@ public class GameBegin {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public int getLastIndex() {
+		return lastIndex;
+	}
+
+	public void setLastIndex(int lastIndex) {
+		this.lastIndex = lastIndex;
+	}
+
+	public int getInsideCounter() {
+		return insideCounter;
+	}
+
+	public void setInsideCounter(int insideCounter) {
+		this.insideCounter = insideCounter;
+	}
+
+	public int getCpPlayedCardNumber() {
+		return cpPlayedCardNumber;
+	}
+
+	public void setCpPlayedCardNumber(int cpPlayedCardNumber) {
+		this.cpPlayedCardNumber = cpPlayedCardNumber;
+	}
+
+	public int getComputerRandomPlayCounter() {
+		return computerRandomPlayCounter;
+	}
+
+	public void setComputerRandomPlayCounter(int computerRandomPlayCounter) {
+		this.computerRandomPlayCounter = computerRandomPlayCounter;
 	}
 	
 	

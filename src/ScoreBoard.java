@@ -23,7 +23,7 @@ public class ScoreBoard {
 		 int counter = 0;
 		 
 			 try {
-					Scanner scanner = new Scanner(new File("C:\\Users\\alper\\Desktop\\PistiProject\\SE-115-Project\\Scores.txt"));
+					Scanner scanner = new Scanner(new File("../../Scores.txt"));
 
 					while (scanner.hasNextLine()) {
 						userScores[counter++] = scanner.nextLine();
@@ -37,7 +37,7 @@ public class ScoreBoard {
 			 
 		sortUserScore();	
 		deleteWords();
-		 
+		
 		 boolean isItFull = true;
 		 
 		 for (int i = 0; i<userScores.length; i++) {
@@ -50,24 +50,19 @@ public class ScoreBoard {
 				 break;
 			 }
 		 }
-		 
 		 sortUserScore();	
 		 
-		 if (isItFull) {
-			 if (Integer.parseInt(userScores[9].substring(userScores[9].length()-3, userScores[9].length())) < Integer.parseInt(getScore())) {
+			 if (isItFull && Integer.parseInt(userScores[9].substring(userScores[9].length()-3, userScores[9].length())) < Integer.parseInt(getScore())) {
 				 userScores[9] =  "Name: "+ getName() +" | Score: "+ getScore();
-			 }
-			 
-		 }
+				 sortUserScore();
+			 }	 
 		 
-		 sortUserScore();		 
-		 
- 
+
 		 Formatter f = null;
 		 FileWriter fw = null;
 		 try {
 			 
-			 fw = new FileWriter ("C:\\Users\\alper\\Desktop\\PistiProject\\SE-115-Project\\Scores.txt" , true);
+			 fw = new FileWriter ("../../Scores.txt" , true);
 			 f = new Formatter (fw);
 			 for (int i = 0; i<userScores.length;i++) {
 				 if (userScores[i] == null) {
@@ -91,7 +86,7 @@ public class ScoreBoard {
 		  public static void deleteWords() {
 			  
 		    // Create a File object representing the text file you want to modify
-		    File file = new File("C:\\Users\\alper\\Desktop\\PistiProject\\SE-115-Project\\Scores.txt");
+		    File file = new File("../../Scores.txt");
 		    
 		    // Create a PrintWriter object to write to the text file
 		    PrintWriter writer = null;

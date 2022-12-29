@@ -15,12 +15,11 @@ public class Deck {
 	private static String[] collectedUserCards = new String[deck.length];
 	private static String[] collectedComputerCards = new String[deck.length];
 	private static String LastFloorCard = "";
-	private static int counter = 0;
 	private static int userPisti = 0;
 	private static int computerPisti = 0;
 	private static int floorCardsNumber;
-	private static int insideCounter;
-	private static int insideCounter3;
+	private static int playerCounter;
+	private static int cpPlayedCardNumber;
 	private static int collectedUserCardsNumber = 0;
 	private static int collectedComputerCardsNumber = 0;
  	private static int computerRandomPlayCounter;	
@@ -43,19 +42,28 @@ public class Deck {
 	public String[] DeckOfCard() {					//Creates a new deck.
 		
 		System.out.println("The cards are dealing..");
+		
+		// Initialize counter to keep track of the current position in the deck
+		int counter = 0;
+		
+		// Loop through the suits and ranks and create the cards
 		for (int i = 0; i<suits.length ; i++) {
 			for (int j = 0; j<ranks.length ; j++) {
 				deck[counter++] = suits[i] +" " +ranks[j];	
 			}
 		}
+		// Return the completed deck
 		return deck;
-}
-	
+	}
 			
 	public void ShuffleCards(String[] deck) {			//Shuffling Cards
 		
 		System.out.println("The cards are shuffling..");
+		
+		// Initialize temporary variable to hold a card
 		String temp = "";
+		
+		// Loop through the deck and swap each card with a randomly chosen card
 		for (int i = 0; i < deck.length ; i++) {
 			temp = deck[i];
 			int randomNumber = random.nextInt(52);
@@ -63,7 +71,6 @@ public class Deck {
 			deck[randomNumber] = temp;
 		}
 	}
-	
 	public void cutDeck(String[] deck) {			//Asks user where to cut the deck.
 		
 	    
@@ -118,34 +125,46 @@ public class Deck {
 	}
 	
 	public void floorPlacement(String[] deck) {   //Setting 4 card to the floor.
+		// Loop through the cards and assign them to the floor array
 		for (int i = 0; i < 4; i++) {
 			floor[i] = deck[deck.length-1-i];
 			//System.out.println("Cards on the floor are: "+ floor[i]);
 		}
+		
+		// Initialize remaining variables
 		floorCardsNumber = 4;
 		LastFloorCard = floor[3];
 		//System.out.println("The Last card on the floor is: "+ LastFloorCard);
-		
 	}
 	
 	public void dealCards(String[] deck, int round) {	//Deal Cards to user and computer row by row.
 		
+		// Initialize variables
 		int count = 2;
 		int UserIndex = 0;
 		int ComputerIndex = 0;
 		
+		// Loop through the cards and assign them to the appropriate array (userCards or computerCards)
 		for (int i = 1 ; i<= 8 ; i++) {
+			// Check if the current card should be assigned to the user or the computer
 			if (count % 2 == 0) {
-				userCards[UserIndex] = deck[deck.length-4-i-(round-1)*8];
+				// Assign card to user
+				userCards[UserIndex++] = deck[deck.length-4-i-(round-1)*8];
 				count++;
-				UserIndex++;
 			}
 			else {
-				computerCards[ComputerIndex] = deck[deck.length-4-i-(round-1)*8];
+				// Assign card to computer
+				computerCards[ComputerIndex++] = deck[deck.length-4-i-(round-1)*8];
 				count++;
-				ComputerIndex++;
 			}
 		}
+		
+		// Initialize remaining variables
+		lastIndex = 3;
+		playerCounter = 0;
+		cpPlayedCardNumber = 0;
+		computerRandomPlayCounter = 4;
+	
 		
 		//By the way this is the second way of deal cards not 1-1 this one is deals 4-4
 		
@@ -155,22 +174,21 @@ public class Deck {
 			computerCards[i-4*round] = deck[deck.length-1-i-4-k];
 		}*/
 		
-
-		lastIndex = 3;
-		insideCounter = 0;
-		insideCounter3 = 0;
-		computerRandomPlayCounter = 4;
-		
 	}
 	public void organizeComputerCards(String[] computerCards, int i) {		//Organising Computer Cards
+		
+		// Initialize temporary variable to hold a card
 		String temp2 = "  ";
+		
+		// Swap the card at the given index with the card at the lastIndex
 		temp2 = computerCards[lastIndex];			
 		computerCards[i] = temp2;
 		computerCards[lastIndex] = "    ";
+		
+		// Decrement the computerRandomPlayCounter and increment cpPlayedCardNumber
 		computerRandomPlayCounter --;
-		insideCounter3++;
+		cpPlayedCardNumber++;
 	}
-	
 public void gameRun() {						
 		
 	//Shows computer cards
@@ -179,22 +197,19 @@ public void gameRun() {
 		System.out.println(i+". Card: "+ computerCards[i]);
 	}*/
 	System.out.println();
-	
 		String[] lastCard = new String[1];
-
+		
 		if (LastFloorCard.equals("    ")) {
 			System.out.println("The floor is empty.");
 		} else {
 			System.out.println("The last card is: "+LastFloorCard);
 		}
-		
 		System.out.println();
 		
 		//User Play Part
-		
 		//Shows user cards
 		System.out.println("Your Cards: ");		
-		for (int i = 0; i < 4-insideCounter ; i++) {
+		for (int i = 0; i < 4-playerCounter ; i++) {
 			System.out.println((i+1)+")"+userCards[i]);
 		}
 		System.out.println();
@@ -202,11 +217,9 @@ public void gameRun() {
 		lastCard[0] = "  ";
 		int userChoice = 0;
 		boolean flag = true;
-
 		System.out.println("Which one do you want to throw to floor ? Type a number please!");
 		while (flag) {
 			String OtherUserChoice = scanner.next();
-			
 			try {
 				userChoice = Integer.parseInt(OtherUserChoice);
 				
@@ -214,17 +227,13 @@ public void gameRun() {
 			catch (Exception e) {
 				System.out.println(("Please type a valid value!"));
 				continue;
-				
 			}
-		
 			flag = false;
 		}
-		
-		if (userChoice > 4-insideCounter || userChoice < 1) {
+		if (userChoice > 4-playerCounter || userChoice < 1) {
 			System.out.println("Please enter a valid value! ");
 			System.out.println();
-		
-			
+
 			return;
 		}
 
@@ -292,16 +301,15 @@ public void gameRun() {
 		}
 		
 		
-		computerTurn = true;
-		int computerRandomPlay = random.nextInt(computerRandomPlayCounter);
 		
 		//Computer Play Part
-	
-
+		computerTurn = true;
+		int computerRandomPlay = random.nextInt(computerRandomPlayCounter);
 				if (floorCardsNumber > 0 && computerTurn) {
 					//Checks if computer have a sensible card to play.
-					for (int i = 0; i< computerCards.length-insideCounter3 ; i++) {
-						if (computerCards[i].substring(computerCards[i].length()-2,computerCards[i].length()).equals(LastFloorCard.substring(LastFloorCard.length()-2, LastFloorCard.length())) ) {
+					for (int i = 0; i< computerCards.length-cpPlayedCardNumber ; i++) {
+						if (computerCards[i].substring(computerCards[i].length()-2,computerCards[i].length()).equals
+								(LastFloorCard.substring(LastFloorCard.length()-2, LastFloorCard.length())) ) {
 							if (floorCardsNumber == 1) {
 								setComputerPisti(getComputerPisti() + 1);
 								System.out.println("The computer made pisti!!");
@@ -341,16 +349,14 @@ public void gameRun() {
 				} 
 			
 			//Checks Jack's
-				
 			if (computerTurn && floorCardsNumber > 0) {
-					for (int i = 0; i< computerCards.length-insideCounter3 ; i++) {
+					for (int i = 0; i< computerCards.length-cpPlayedCardNumber ; i++) {
 						//Checks last 4 index 
 						if (computerCards[i].substring(computerCards[i].length()-4, computerCards[i].length()).equals("Jack") ) {
 							if (floorCardsNumber == 1 && LastFloorCard.substring(LastFloorCard.length()-4, LastFloorCard.length()).equals("Jack")) {
 								setComputerPisti(getComputerPisti() + 1);
-								
 								System.out.println("The computer made pisti!!");
-								
+								 
 								floor[0] = "  ";
 								collectedComputerCardsNumber += floorCardsNumber;
 								
@@ -425,7 +431,7 @@ public void gameRun() {
 			temp = userCards[lastIndex];
 			userCards[userChoice-1] = temp;
 			userCards[lastIndex] = "  ";
-			insideCounter++;
+			playerCounter++;
 			
 			lastIndex--;
 			
@@ -453,6 +459,7 @@ public static void setLastWin(int lastWin) {
 
 
 public void collectLastCards(int lastwin) {			//Collecting the last cards by looking at who took the last cards from on the floor.
+	//lastwin 0 == user
 	if (lastwin == 0) {
 		for (int i = 0 ; i <floorCardsNumber  ; i++) {
 			collectedUserCards[i+collectedUserCardsNumber] = floor[i];
@@ -464,6 +471,7 @@ public void collectLastCards(int lastwin) {			//Collecting the last cards by loo
 		System.out.println("You collected all last cards.");
 		
 	}
+	//lastwin 1 == computer
 	if (lastwin == 1) {
 		for (int i = 0 ; i <floorCardsNumber  ; i++) {
 			collectedComputerCards[i+collectedComputerCardsNumber] = floor[i];

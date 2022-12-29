@@ -14,14 +14,11 @@ public class Main {
 		GameBegin gameBegin = new GameBegin();
 		GameEnd gameEnd = new GameEnd();
 		ScoreBoard scoreBoard = new ScoreBoard();
-		
-		
-		
+			
 		gameBegin.getUserName();
 		deck.ShuffleCards(deck1);
 		deck.cutDeck(deck1);
 		deck.floorPlacement(deck1);
-		
 		
 		while (round < 7) {
 			
@@ -43,13 +40,7 @@ public class Main {
 		
 		scoreBoard.scoreWriter(calculator.userScore(), gameBegin.getUsername());
 		scoreBoard.getUserScores();
-		
-		
-		
 
 	}
-	
-	
-	
 
 }
